@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct BookmarkView: View {
+    @StateObject private var stateObject = BookmarkIntent()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                ForEach(stateObject.bookmarks, id: \.self) { bookmark in
+                    if let imageData = FileManagerClass.sharedInstance.loadRecipeDataFromFileManager(relativePath: bookmark.bookmarkURL ?? "") {
+                        Image(uiImage: UIImage(data: imageData)!)
+                            .resizable()
+                            .frame(width: 300, height: 200)
+                    }
+                }
+                .onDelete(perform: stateObject.deleteBookmark)
+            }
+            .onAppear {
+                stateObject.fetchBookmarks()
+            }
+            .navigationBarTitle("Bookmarks")
+        }
     }
 }
 

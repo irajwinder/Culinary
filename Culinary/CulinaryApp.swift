@@ -12,7 +12,7 @@ struct CulinaryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SearchRecipeView()
+            TabBarView()
         }
     }
 }
