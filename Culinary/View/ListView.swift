@@ -18,22 +18,26 @@ struct ListView: View {
         List {
             ForEach(observedObject.recipesResponse, id: \.id) { recipe in
                 NavigationLink(destination: RecipeDetailsView(recipe: recipe)) {
-                    LazyImage(url: URL(string: recipe.image))
+                    VStack(alignment: .leading, spacing: 8) {
+                        LazyImage(url: URL(string: recipe.image))
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(recipe.title)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            
+                            Text("Recipe Number: \(recipe.id)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                    }
                 }
                 CustomBookmarkButton {
                     stateObject.saveBookmark(recipe: recipe)
                     self.showAlert = true
                     self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
                 }
-                .onAppear(perform: {
-                    // Check if the current photo is the last one
-//                    if recipe.id == observedObject.recipesResponse.last?.id {
-//                        // Load the next page when the last photo is reached
-//                        observedObject.currentPage += 1
-//                        observedObject.searchRecipes()
-//                        print(observedObject.currentPage)
-//                    }
-                })
             }
         }
         .navigationBarTitle("Recipe List")

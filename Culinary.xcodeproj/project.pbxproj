@@ -199,8 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				A2CF583D2B34B385005FD474 /* SearchRecipeIntent.swift */,
-				A2CF58582B34CE0E005FD474 /* BookmarkIntent.swift */,
 				A2CF585A2B34E1BC005FD474 /* RecipeListIntent.swift */,
+				A2CF58582B34CE0E005FD474 /* BookmarkIntent.swift */,
 				A2CF585C2B34E376005FD474 /* LazyImageIntent.swift */,
 			);
 			path = Intent;

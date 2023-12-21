@@ -8,7 +8,6 @@
 import SwiftUI
 
 class SearchRecipeIntent: ObservableObject {
-    
     @Published var recipesResponse: [Recipe] = []
     @Published var searchText = ""
     

@@ -34,7 +34,7 @@ struct SearchRecipeView: View {
             }
             .padding()
             .onAppear {
-                //stateObject.recipesResponse = []
+                stateObject.recipesResponse = []
                 let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
                 print(paths[0])
             }

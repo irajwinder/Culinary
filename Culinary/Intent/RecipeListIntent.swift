@@ -22,7 +22,7 @@ class RecipeListIntent: ObservableObject {
             // Save the image data to FileManager
             if let relativeURL = FileManagerClass.sharedInstance.saveRecipeToFileManager(imageData: imageData, recipe: recipe) {
                 // Save the relative URL to CoreData
-                DataManager.sharedInstance.saveBookmark(recipeURL: relativeURL)
+                DataManager.sharedInstance.saveBookmark(bookmarkURL: relativeURL)
             }
         }
     }

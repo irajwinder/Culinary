@@ -29,14 +29,14 @@ class DataManager: NSObject {
     }()
     
     // Save Bookmark to CoreData
-    func saveBookmark(recipeURL: String) {
+    func saveBookmark(bookmarkURL: String) {
         // Access the view context from the persistent container
         let managedContext = persistentContainer.viewContext
         
         //Create a newBookMark Object
         let newBookmark = Bookmark(context: managedContext)
         // Set the values for attribute of the Bookmark entity
-        newBookmark.bookmarkURL = recipeURL
+        newBookmark.bookmarkURL = bookmarkURL
         
         do {
             // Attempting to save the changes made to the managed context

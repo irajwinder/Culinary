@@ -20,7 +20,7 @@ class NetworkManager : NSObject {
     }
     
     func searchRecipes(query: String, completion: @escaping (RecipeResponse?) -> Void) {
-        let apiUrl = "\(baseRecipeURL)/recipes/complexSearch?query=\(query)"
+        let apiUrl = "\(APIConstants.baseRecipeURL)/recipes/complexSearch?query=\(query)"
         
         // 1. Get the url
         guard let requestURL = URL(string: apiUrl) else {
@@ -35,7 +35,7 @@ class NetworkManager : NSObject {
         urlRequest.cachePolicy = .useProtocolCachePolicy
         urlRequest.timeoutInterval = 30.0
         urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = headers
+        urlRequest.allHTTPHeaderFields = APIConstants.headers
         
         //3. Make API request
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
