@@ -44,7 +44,7 @@ class SearchRecipeIntent: ObservableObject {
     func searchByIngredients() {
         NetworkManager.sharedInstance.filterRecipesByIngredients(query: searchText){ [weak self] response in
             guard let self = self, let response = response else {
-                print("Failed to fetch Nutriant")
+                print("Failed to fetch Ingredients")
                 return
             }
             DispatchQueue.main.async {

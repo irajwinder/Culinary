@@ -17,36 +17,12 @@ class APIManager: NSObject {
         super.init()
     }
     
-    // Decode Recipe response
-    func decodeRecipeResponse(data: Data) -> RecipeResponse? {
+    // Generic function to decode different types of responses
+    func decodeResponse<T: Decodable>(data: Data, responseType: T.Type) -> T? {
         do {
             let decoder = JSONDecoder()
-            let recipeSearchResponse = try decoder.decode(RecipeResponse.self, from: data)
-            return recipeSearchResponse
-        } catch {
-            print("Error decoding JSON: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    // Decode Nutrient response
-    func decodeNutrientResponse(data: Data) -> [Nutrient]? {
-        do {
-            let decoder = JSONDecoder()
-            let nutrientResponse = try decoder.decode([Nutrient].self, from: data)
-            return nutrientResponse
-        } catch {
-            print("Error decoding JSON: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    // Decode Ingredient response
-    func decodeIngredientResponse(data: Data) -> [Ingredient]? {
-        do {
-            let decoder = JSONDecoder()
-            let ingredientResponse = try decoder.decode([Ingredient].self, from: data)
-            return ingredientResponse
+            let decodedResponse = try decoder.decode(responseType, from: data)
+            return decodedResponse
         } catch {
             print("Error decoding JSON: \(error.localizedDescription)")
             return nil

@@ -18,27 +18,27 @@ struct SearchRecipeView: View {
     @State private var navigateToListView = false
     @State private var showAlert = false
     @State private var alert: Alert?
-
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 HStack {
-                    if stateObject.selectedSearchType != .nutrient {
-                        CustomSearchField(placeholder: "Enter search text", searchText: $stateObject.searchText)
-                    } else {
+                    if stateObject.selectedSearchType == .nutrient {
                         HStack {
                             TextField("Min Carbs", text: $stateObject.minCarbs)
                                 .keyboardType(.numberPad)
                             TextField("Max Carbs", text: $stateObject.maxCarbs)
                                 .keyboardType(.numberPad)
                         }
+                    } else {
+                        CustomSearchField(placeholder: "Enter search text", searchText: $stateObject.searchText)
                     }
-
+                    
                     CustomSearchButton {
                         validateSearch()
                     }
                 }
-
+                
                 Picker("Search Type", selection: $stateObject.selectedSearchType) {
                     ForEach(SearchType.allCases, id: \.self) { type in
                         Text(type.rawValue)

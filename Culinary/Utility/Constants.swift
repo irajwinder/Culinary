@@ -13,3 +13,8 @@ struct APIConstants {
     ]
     static let baseRecipeURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes"
 }
+
+struct FileManagerConstants {
+    static let folderName = "BookmarkedRecipes"
+    static let fileExtension = ".jpg"
+}

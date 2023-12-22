@@ -18,19 +18,21 @@ class FileManagerClass: NSObject {
         super.init()
     }
     
-    func saveRecipeToFileManager(imageData: Data, recipe: Recipe) -> String? {
-        let recipeID = String(recipe.id)
-        
-        // folder name and file name based on recipe ID
-        let folderName = "BookmarkedRecipes"
-        let fileName = "\(recipeID).jpg"
+    private func localFileURL(forRelativePath relativePath: String) -> URL {
+        // Get the documents directory URL
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsDirectory.appendingPathComponent(relativePath)
+    }
+    
+    func saveRecipeToFileManager(imageData: Data) -> String? {
+        // folder name and file name
+        let folderName = FileManagerConstants.folderName
+        let fileName = UUID().uuidString + FileManagerConstants.fileExtension
         let relativeURL = "\(folderName)/\(fileName)"
         
+        let fileURL = localFileURL(forRelativePath: relativeURL)
+        
         do {
-            // Get the documents directory URL
-            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fileURL = documentsDirectory.appendingPathComponent(relativeURL)
-            
             // Create the necessary directory structure if it doesn't exist
             try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
             
@@ -44,15 +46,12 @@ class FileManagerClass: NSObject {
         }
     }
     
-    
     func loadRecipeDataFromFileManager(relativePath: String) -> Data? {
-        // Construct the local file URL by appending the relative path to the documents directory
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let localFileURL = documentsDirectory.appendingPathComponent(relativePath)
+        let fileURL = localFileURL(forRelativePath: relativePath)
         
         do {
             // Read image data from the local file
-            let imageData = try Data(contentsOf: localFileURL)
+            let imageData = try Data(contentsOf: fileURL)
             return imageData
         } catch {
             print("Error loading image data:", error.localizedDescription)
@@ -61,12 +60,11 @@ class FileManagerClass: NSObject {
     }
     
     func deleteRecipeFromFileManager(relativePath: String) {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let localFileURL = documentsDirectory.appendingPathComponent(relativePath)
+        let fileURL = localFileURL(forRelativePath: relativePath)
         
         do {
-            try FileManager.default.removeItem(at: localFileURL)
-            print("Image deleted from file manager:", localFileURL)
+            try FileManager.default.removeItem(at: fileURL)
+            print("Image deleted from file manager:", fileURL)
         } catch {
             print("Error deleting image from file manager:", error.localizedDescription)
         }

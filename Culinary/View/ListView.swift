@@ -67,11 +67,6 @@ struct ListView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-//                CustomBookmarkButton {
-//                    stateObject.saveBookmark(recipe: recipe)
-//                    self.showAlert = true
-//                    self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
-//                }
             }
             
             ForEach(observedObject.ingredientResponse, id: \.id) { ingredient in
@@ -96,11 +91,6 @@ struct ListView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-//                CustomBookmarkButton {
-//                    stateObject.saveBookmark(recipe: recipe)
-//                    self.showAlert = true
-//                    self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
-//                }
             }
         }
         .navigationBarTitle("Recipe List")
