@@ -23,7 +23,16 @@ struct SearchRecipeView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 HStack {
-                    CustomSearchField(placeholder: "Enter search text", searchText: $stateObject.searchText)
+                    if stateObject.selectedSearchType != .nutrient {
+                        CustomSearchField(placeholder: "Enter search text", searchText: $stateObject.searchText)
+                    } else {
+                        HStack {
+                            TextField("Min Carbs", text: $stateObject.minCarbs)
+                                .keyboardType(.numberPad)
+                            TextField("Max Carbs", text: $stateObject.maxCarbs)
+                                .keyboardType(.numberPad)
+                        }
+                    }
 
                     CustomSearchButton {
                         validateSearch()
@@ -36,7 +45,7 @@ struct SearchRecipeView: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .frame(width: 200)
+                .frame(width: 300)
             }
             .navigationBarTitle("Search")
             .alert(isPresented: $showAlert) {
