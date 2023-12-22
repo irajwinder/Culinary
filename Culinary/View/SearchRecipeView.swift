@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum SearchType: String, CaseIterable {
+    case recipe = "Recipe"
+    case nutrient = "Nutrient"
+    case ingredient = "Ingredient"
+}
+
 struct SearchRecipeView: View {
     @StateObject private var stateObject = SearchRecipeIntent()
     @State private var navigateToListView = false
@@ -24,6 +30,13 @@ struct SearchRecipeView: View {
                     }
                 }
 
+                Picker("Search Type", selection: $stateObject.selectedSearchType) {
+                    ForEach(SearchType.allCases, id: \.self) { type in
+                        Text(type.rawValue)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .frame(width: 200)
             }
             .navigationBarTitle("Search")
             .alert(isPresented: $showAlert) {
@@ -35,6 +48,9 @@ struct SearchRecipeView: View {
             .padding()
             .onAppear {
                 stateObject.recipesResponse = []
+                stateObject.nutrientResponse = []
+                stateObject.ingredientResponse = []
+                
                 let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
                 print(paths[0])
             }
@@ -48,8 +64,17 @@ struct SearchRecipeView: View {
             return
         }
         
-        stateObject.searchRecipes()
-        navigateToListView = true
+        switch stateObject.selectedSearchType {
+        case .recipe:
+            stateObject.searchRecipes()
+            navigateToListView = true
+        case .nutrient:
+            stateObject.searchByNutriants()
+            navigateToListView = true
+        case .ingredient:
+            stateObject.searchByIngredients()
+            navigateToListView = true
+        }
     }
 }
 

@@ -19,8 +19,7 @@ struct Recipe: Codable {
     let image: String
 }
 
-//Array Response
-struct Nutrition: Codable {
+struct Nutrient: Codable {
     let id: Int
     let title: String
     let image: String
@@ -30,7 +29,6 @@ struct Nutrition: Codable {
     let carbs: String
 }
 
-//Array response
 struct Ingredient: Codable {
     let id: Int
     let title: String

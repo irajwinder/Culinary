@@ -11,6 +11,11 @@ class SearchRecipeIntent: ObservableObject {
     @Published var recipesResponse: [Recipe] = []
     @Published var searchText = ""
     
+    @Published var nutrientResponse: [Nutrient] = []
+    @Published var ingredientResponse: [Ingredient] = []
+    
+    @Published var selectedSearchType = SearchType.recipe
+    
     func searchRecipes() {
         NetworkManager.sharedInstance.searchRecipes(query: searchText) { [weak self] response in
             guard let self = self, let response = response?.results else {
@@ -20,8 +25,42 @@ class SearchRecipeIntent: ObservableObject {
             DispatchQueue.main.async {
                 self.recipesResponse.append(contentsOf: response)
             }
-            print(response)
-            print(searchText)
+        }
+    }
+    
+    func searchByNutriants() {
+        NetworkManager.sharedInstance.filterRecipesByNutrients(minCarbs: 10, maxCarbs: 100) { [weak self] response in
+            guard let self = self, let response = response else {
+                print("Failed to fetch Nutriant")
+                return
+            }
+            DispatchQueue.main.async {
+                self.nutrientResponse.append(contentsOf: response)
+            }
+            
+            for data in response {
+                print(data.id)
+                print(data.title)
+                print(data.image)
+            }
+        }
+    }
+    
+    func searchByIngredients() {
+        NetworkManager.sharedInstance.filterRecipesByIngredients(query: "apples flour sugar"){ [weak self] response in
+            guard let self = self, let response = response else {
+                print("Failed to fetch Nutriant")
+                return
+            }
+            DispatchQueue.main.async {
+                self.ingredientResponse.append(contentsOf: response)
+            }
+            
+            for data in response {
+                print(data.id)
+                print(data.title)
+                print(data.image)
+            }
         }
     }
 }

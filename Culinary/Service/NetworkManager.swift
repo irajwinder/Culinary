@@ -21,8 +21,6 @@ class NetworkManager : NSObject {
     
     func searchRecipes(query: String, completion: @escaping (RecipeResponse?) -> Void) {
         let apiUrl = "\(APIConstants.baseRecipeURL)/complexSearch?query=\(query)"
-        let apiUrl2 = "\(APIConstants.baseRecipeURL)/findByNutrients?minCarbs=\(10)&maxCarbs=\(10)"
-        let apiUr3 = "\(APIConstants.baseRecipeURL)/findByIngredients?ingredients=\("apples,+flour,+sugar")"
         
         // 1. Get the url
         guard let requestURL = URL(string: apiUrl) else {
@@ -50,6 +48,72 @@ class NetworkManager : NSObject {
             // Decode JSON response
             let recipeResponse = APIManager.sharedInstance.decodeRecipeResponse(data: data)
             completion(recipeResponse)
+        }
+        task.resume()
+    }
+    
+    func filterRecipesByNutrients(minCarbs: Int, maxCarbs: Int, completion: @escaping ([Nutrient]?) -> Void) {
+        let apiUrl = "\(APIConstants.baseRecipeURL)/findByNutrients?minCarbs=\(minCarbs)&maxCarbs=\(maxCarbs)"
+        
+        // 1. Get the url
+        guard let requestURL = URL(string: apiUrl) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        // 2. Get the URLRequest
+        var urlRequest = URLRequest(url: requestURL)
+        // Sets cache policy and timeout interval for the request
+        urlRequest.cachePolicy = .useProtocolCachePolicy
+        urlRequest.timeoutInterval = 30.0
+        urlRequest.httpMethod = "GET"
+        urlRequest.allHTTPHeaderFields = APIConstants.headers
+        
+        //3. Make API request
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+                return
+            }
+            
+            // Decode JSON response
+            let nutrientResponse = APIManager.sharedInstance.decodeNutrientResponse(data: data)
+            completion(nutrientResponse)
+        }
+        task.resume()
+    }
+    
+    func filterRecipesByIngredients(query: String, completion: @escaping ([Ingredient]?) -> Void) {
+        let apiUrl = "\(APIConstants.baseRecipeURL)/findByIngredients?ingredients=\(query)"
+        
+        // 1. Get the url
+        guard let requestURL = URL(string: apiUrl) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        // 2. Get the URLRequest
+        var urlRequest = URLRequest(url: requestURL)
+        // Sets cache policy and timeout interval for the request
+        urlRequest.cachePolicy = .useProtocolCachePolicy
+        urlRequest.timeoutInterval = 30.0
+        urlRequest.httpMethod = "GET"
+        urlRequest.allHTTPHeaderFields = APIConstants.headers
+        
+        //3. Make API request
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+                return
+            }
+            
+            // Decode JSON response
+            let ingredientResponse = APIManager.sharedInstance.decodeIngredientResponse(data: data)
+            completion(ingredientResponse)
         }
         task.resume()
     }

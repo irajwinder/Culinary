@@ -18,7 +18,6 @@
 		A2CF582F2B34AE6A005FD474 /* Bookmark+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF582D2B34AE6A005FD474 /* Bookmark+CoreDataProperties.swift */; };
 		A2CF58342B34AF0D005FD474 /* SearchRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF58332B34AF0D005FD474 /* SearchRecipeView.swift */; };
 		A2CF58362B34AF20005FD474 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF58352B34AF20005FD474 /* BookmarkView.swift */; };
-		A2CF58382B34AF42005FD474 /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF58372B34AF42005FD474 /* RecipeDetailsView.swift */; };
 		A2CF583A2B34AF51005FD474 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF58392B34AF51005FD474 /* ListView.swift */; };
 		A2CF583E2B34B385005FD474 /* SearchRecipeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF583D2B34B385005FD474 /* SearchRecipeIntent.swift */; };
 		A2CF58432B34C51C005FD474 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF58422B34C51C005FD474 /* TabBarView.swift */; };
@@ -68,7 +67,6 @@
 		A2CF582D2B34AE6A005FD474 /* Bookmark+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bookmark+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A2CF58332B34AF0D005FD474 /* SearchRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeView.swift; sourceTree = "<group>"; };
 		A2CF58352B34AF20005FD474 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
-		A2CF58372B34AF42005FD474 /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
 		A2CF58392B34AF51005FD474 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A2CF583B2B34AF74005FD474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2CF583D2B34B385005FD474 /* SearchRecipeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeIntent.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				A2CF58292B34ADE7005FD474 /* Model */,
 				A2CF582A2B34ADF5005FD474 /* View */,
 				A2CF582B2B34ADFE005FD474 /* Intent */,
-				A2CF58412B34C4F5005FD474 /* TabBar */,
 				A2CF58442B34C65C005FD474 /* Utility */,
 				A2CF584F2B34CA42005FD474 /* Service */,
 				A2CF58552B34CD74005FD474 /* Component */,
@@ -189,8 +186,8 @@
 			children = (
 				A2CF58332B34AF0D005FD474 /* SearchRecipeView.swift */,
 				A2CF58392B34AF51005FD474 /* ListView.swift */,
-				A2CF58372B34AF42005FD474 /* RecipeDetailsView.swift */,
 				A2CF58352B34AF20005FD474 /* BookmarkView.swift */,
+				A2CF58412B34C4F5005FD474 /* TabBar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,7 +399,6 @@
 				A2CF58362B34AF20005FD474 /* BookmarkView.swift in Sources */,
 				A2CF58072B34AD29005FD474 /* Culinary.xcdatamodeld in Sources */,
 				A2CF584C2B34C8E5005FD474 /* Constants.swift in Sources */,
-				A2CF58382B34AF42005FD474 /* RecipeDetailsView.swift in Sources */,
 				A2CF582F2B34AE6A005FD474 /* Bookmark+CoreDataProperties.swift in Sources */,
 				A2CF585B2B34E1BD005FD474 /* RecipeListIntent.swift in Sources */,
 				A2CF58592B34CE0E005FD474 /* BookmarkIntent.swift in Sources */,

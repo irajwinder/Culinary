@@ -28,4 +28,28 @@ class APIManager: NSObject {
             return nil
         }
     }
+    
+    // Decode Nutrient response
+    func decodeNutrientResponse(data: Data) -> [Nutrient]? {
+        do {
+            let decoder = JSONDecoder()
+            let nutrientResponse = try decoder.decode([Nutrient].self, from: data)
+            return nutrientResponse
+        } catch {
+            print("Error decoding JSON: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    // Decode Ingredient response
+    func decodeIngredientResponse(data: Data) -> [Ingredient]? {
+        do {
+            let decoder = JSONDecoder()
+            let ingredientResponse = try decoder.decode([Ingredient].self, from: data)
+            return ingredientResponse
+        } catch {
+            print("Error decoding JSON: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
