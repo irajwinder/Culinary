@@ -67,10 +67,24 @@ struct SearchRecipeView: View {
     }
     
     func validateSearch() {
-        guard Validation.isValidName(stateObject.searchText) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Enter Search Text")
-            return
+        if stateObject.selectedSearchType == .nutrient {
+            guard Validation.isValidNumber(stateObject.minCarbs) else {
+                showAlert = true
+                alert = Validation.showAlert(title: "Error", message: "Enter a valid min value(10..100)")
+                return
+            }
+            
+            guard Validation.isValidNumber(stateObject.maxCarbs) else {
+                showAlert = true
+                alert = Validation.showAlert(title: "Error", message: "Enter a valid max value(10..100)")
+                return
+            }
+        } else {
+            guard Validation.isValidName(stateObject.searchText) else {
+                showAlert = true
+                alert = Validation.showAlert(title: "Error", message: "Enter Search Text")
+                return
+            }
         }
         
         switch stateObject.selectedSearchType {

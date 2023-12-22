@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+
 class RecipeListIntent: ObservableObject {
     
-    func saveBookmark(recipe: Recipe) {
-        guard let imageURL = URL(string: recipe.image) else {
+    func saveBookmark<T: Codable>(item: T) {
+        guard let imageURL = URL(string: getImageURL(item: item)) else {
             return
         }
         
@@ -24,6 +25,18 @@ class RecipeListIntent: ObservableObject {
                 // Save the relative URL to CoreData
                 DataManager.sharedInstance.saveBookmark(bookmarkURL: relativeURL)
             }
+        }
+    }
+    
+    func getImageURL<T: Codable>(item: T) -> String {
+        if let recipe = item as? Recipe {
+            return recipe.image
+        } else if let nutrient = item as? Nutrient {
+            return nutrient.image
+        } else if let ingredient = item as? Ingredient {
+            return ingredient.image
+        } else {
+            return ""
         }
     }
 }

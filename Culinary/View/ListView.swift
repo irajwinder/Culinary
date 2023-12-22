@@ -31,7 +31,7 @@ struct ListView: View {
                     }
                 }
                 CustomBookmarkButton {
-                    stateObject.saveBookmark(recipe: recipe)
+                    stateObject.saveBookmark(item: recipe)
                     self.showAlert = true
                     self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
                 }
@@ -67,6 +67,11 @@ struct ListView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                CustomBookmarkButton {
+                    stateObject.saveBookmark(item: nutrient)
+                    self.showAlert = true
+                    self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
+                }
             }
             
             ForEach(observedObject.ingredientResponse, id: \.id) { ingredient in
@@ -90,6 +95,11 @@ struct ListView: View {
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
+                }
+                CustomBookmarkButton {
+                    stateObject.saveBookmark(item: ingredient)
+                    self.showAlert = true
+                    self.alert = Validation.showAlert(title: "Success", message: "Successfully saved to Bookmark")
                 }
             }
         }

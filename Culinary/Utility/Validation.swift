@@ -14,7 +14,14 @@ struct Validation {
         }
         return true
     }
-
+    
+    static func isValidNumber(_ number: String?) -> Bool {
+        guard let numberString = number, let intValue = Int(numberString) else {
+            return false
+        }
+        return intValue >= 10 && intValue <= 100
+    }
+    
     static func showAlert(title: String, message: String) -> Alert {
         return Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK")))
     }
