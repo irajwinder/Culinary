@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class RecipeListIntent: ObservableObject {
     
     func saveBookmark<T: Codable>(item: T) {
@@ -16,8 +15,8 @@ class RecipeListIntent: ObservableObject {
         }
         
         // Download image
-        NetworkManager.sharedInstance.downloadImage(from: imageURL) { [weak self] imageData in
-            guard let self = self, let imageData = imageData else {
+        NetworkManager.sharedInstance.downloadImage(from: imageURL) { imageData in
+            guard let imageData = imageData else {
                 return
             }
             // Save the image data to FileManager
