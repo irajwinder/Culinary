@@ -20,7 +20,9 @@ class NetworkManager : NSObject {
     }
     
     func searchRecipes(query: String, completion: @escaping (RecipeResponse?) -> Void) {
-        let apiUrl = "\(APIConstants.baseRecipeURL)/recipes/complexSearch?query=\(query)"
+        let apiUrl = "\(APIConstants.baseRecipeURL)/complexSearch?query=\(query)"
+        let apiUrl2 = "\(APIConstants.baseRecipeURL)/findByNutrients?minCarbs=\(10)&maxCarbs=\(10)"
+        let apiUr3 = "\(APIConstants.baseRecipeURL)/findByIngredients?ingredients=\("apples,+flour,+sugar")"
         
         // 1. Get the url
         guard let requestURL = URL(string: apiUrl) else {
