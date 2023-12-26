@@ -50,6 +50,7 @@ class NetworkManager : NSObject {
             return
         }
         
+        // Make API request with specified response type
         makeAPIRequest(url: requestURL, responseType: RecipeResponse.self, completion: completion)
     }
     
