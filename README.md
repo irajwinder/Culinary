@@ -30,7 +30,7 @@ This project utilizes the following technologies:
 - Programming Language: Swift
 - Database: CoreData
 - Frameworks: SwifUI
-- API: [Spoonacular API](https://rapidapi.com/spoonacular/api/recipe-food-nutrition/)
+- API: [Spoonacular API](https://spoonacular.com/food-api/docs)
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/irajwinder/Culinary.git`

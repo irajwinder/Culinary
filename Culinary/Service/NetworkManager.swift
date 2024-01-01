@@ -25,7 +25,6 @@ class NetworkManager : NSObject {
         urlRequest.cachePolicy = .useProtocolCachePolicy
         urlRequest.timeoutInterval = 30.0
         urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = APIConstants.headers
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data, error == nil else {
@@ -43,7 +42,7 @@ class NetworkManager : NSObject {
     
     //search recipes
     func searchRecipes(query: String, completion: @escaping (RecipeResponse?) -> Void) {
-        let apiUrl = "\(APIConstants.baseRecipeURL)/complexSearch?query=\(query)"
+        let apiUrl = "\(APIConstants.baseRecipeURL)/complexSearch?query=\(query)&apiKey=\(APIConstants.apiKey)"
         guard let requestURL = URL(string: apiUrl) else {
             print("Invalid URL")
             completion(nil)
@@ -56,7 +55,7 @@ class NetworkManager : NSObject {
     
     //filter recipes by nutrients
     func filterRecipesByNutrients(minCarbs: Int, maxCarbs: Int, completion: @escaping ([Nutrient]?) -> Void) {
-        let apiUrl = "\(APIConstants.baseRecipeURL)/findByNutrients?minCarbs=\(minCarbs)&maxCarbs=\(maxCarbs)"
+        let apiUrl = "\(APIConstants.baseRecipeURL)/findByNutrients?minCarbs=\(minCarbs)&maxCarbs=\(maxCarbs)&apiKey=\(APIConstants.apiKey)"
         guard let requestURL = URL(string: apiUrl) else {
             print("Invalid URL")
             completion(nil)
@@ -68,7 +67,7 @@ class NetworkManager : NSObject {
     
     //filter recipes by ingredients
     func filterRecipesByIngredients(query: String, completion: @escaping ([Ingredient]?) -> Void) {
-        let apiUrl = "\(APIConstants.baseRecipeURL)/findByIngredients?ingredients=\(query)"
+        let apiUrl = "\(APIConstants.baseRecipeURL)/findByIngredients?ingredients=\(query)&apiKey=\(APIConstants.apiKey)"
         guard let requestURL = URL(string: apiUrl) else {
             print("Invalid URL")
             completion(nil)
